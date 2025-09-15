@@ -13,7 +13,7 @@ import saveCurrentField from '@salesforce/apex/BMA_AccelerateController.saveCurr
 import UploadCompanyLogo from '@salesforce/apex/BMA_AccelerateController.UploadCompanyLogo';
 import getFileUrl from '@salesforce/apex/BMA_AccelerateController.getFileUrl';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-
+import BMAComponentHelpText from '@salesforce/resourceUrl/BMAComponentHelpText';
 export default class Bma_OpptoClose extends LightningElement {
 
     //@api recordId;
@@ -73,12 +73,16 @@ export default class Bma_OpptoClose extends LightningElement {
     uploadedFile;
     isLoading = false ;
 
+     helpText = '';
+     showModal = false;
+
     connectedCallback(){
         //this.projectId = '';
         //console.log(this.projectId);
         this.loadSavedImage();
         this.loadComponentData();
     } 
+
 
     loadComponentData(){
         getSections({ intakeId: this.projectId })
@@ -389,6 +393,21 @@ export default class Bma_OpptoClose extends LightningElement {
         this.showFinishLater = true;
         this.showIntakeContainer = false;
     }
+    //Help button
+    async openHelp() {
+        try {
+            const response = await fetch(BMAComponentHelpText);
+            this.helpText = await response.text();
+            this.showModal = true;   
+        } catch (error) {
+            console.error('Error loading help text:', error);
+        }
+    }
+
+    closeModal() {
+        this.showModal = false;
+    }
+    //help button end
 
     getSectionProgress(){
         this.sectionProgressBar = 

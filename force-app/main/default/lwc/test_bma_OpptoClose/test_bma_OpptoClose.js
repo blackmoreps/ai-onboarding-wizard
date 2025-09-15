@@ -11,6 +11,8 @@ import saveCurrentField from '@salesforce/apex/Test_BMA_AccelerateController.sav
 import UploadCompanyLogo from '@salesforce/apex/Test2_BMA_AccelerateController.UploadCompanyLogo';
 import getFileUrl from '@salesforce/apex/Test2_BMA_AccelerateController.getFileUrl';
 
+import BMAComponentHelpText from '@salesforce/resourceUrl/BMAComponentHelpText';
+
 export default class Bma_OpptoClose extends LightningElement {
     recordId = 'a0sO1000003WlWjIAK';
     // menuItems = [
@@ -62,6 +64,13 @@ export default class Bma_OpptoClose extends LightningElement {
     uploadedFile;
     isLoading = false ;
 
+
+    
+     helpText = '';
+     showModal = false;
+
+
+
     connectedCallback(){
         //this.projectId = '';
         //console.log(this.recordId);
@@ -69,6 +78,24 @@ export default class Bma_OpptoClose extends LightningElement {
         this.loadSavedImage();
         this.loadComponentData();
     } 
+
+
+
+     async openHelp() {
+        try {
+            const response = await fetch(BMAComponentHelpText);
+            this.helpText = await response.text();
+            this.showModal = true;   // show modal with text
+        } catch (error) {
+            console.error('Error loading help text:', error);
+        }
+    }
+
+    closeModal() {
+        this.showModal = false;
+    }
+
+
 
     loadComponentData(){
         getSections({ intakeId: this.recordId })

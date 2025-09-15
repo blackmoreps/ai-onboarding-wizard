@@ -13,6 +13,9 @@ import UploadCompanyLogo from '@salesforce/apex/Test2_BMA_AccelerateController.U
 import  getFileUrl from '@salesforce/apex/Test2_BMA_AccelerateController.getFileUrl';
 
 
+import BMAComponentHelpText from '@salesforce/resourceUrl/BMAComponentHelpText';
+
+
 export default class Test2_Bma_OpptoClose extends LightningElement {
     recordId = 'a0sO1000003jmjVIAQ';
    
@@ -65,6 +68,9 @@ export default class Test2_Bma_OpptoClose extends LightningElement {
     isLoading = false ;
 
     
+
+     helpText = '';
+     showModal = false;
     
 
     connectedCallback(){
@@ -74,6 +80,22 @@ export default class Test2_Bma_OpptoClose extends LightningElement {
         //for logo
         this.loadSavedImage();
     } 
+
+
+     async openHelp() {
+        try {
+            const response = await fetch(BMAComponentHelpText);
+            this.helpText = await response.text();
+            this.showModal = true;   // show modal with text
+        } catch (error) {
+            console.error('Error loading help text:', error);
+        }
+    }
+
+    closeModal() {
+        this.showModal = false;
+    }
+
 
     loadComponentData(){
         getSections({ intakeId: this.recordId })
