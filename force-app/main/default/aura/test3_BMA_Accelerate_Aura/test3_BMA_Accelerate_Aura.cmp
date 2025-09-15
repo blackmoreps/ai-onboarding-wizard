@@ -1,3 +1,0 @@
-<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
-	<c:test3_bma_OpptoClose/>
-</aura:component>

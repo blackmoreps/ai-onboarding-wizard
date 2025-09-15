@@ -1,0 +1,19 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+<<<<<<< HEAD
+  "name": "BlackMore BMA",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "64.0"
+=======
+  "name": "onboardingWizard",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "59.0"
+>>>>>>> af5bdb0abd03bd38fbd1cefef21a023ffd2475ea
+}
